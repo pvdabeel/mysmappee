@@ -57,12 +57,6 @@ CBLUE   = '\33[34m'
 # Support for OS X Dark Mode
 DARK_MODE=os.getenv('BitBarDarkMode',0)
 
-# Class that represents the connection to Smappee
-
-
-
-
-
 # Logo for both dark mode and regular mode
 def app_print_logo():
     if bool(DARK_MODE):
@@ -83,14 +77,14 @@ def init():
     init_password = getpass.getpass()
     init_access_token = None
 
-    client_id = 'todo'
-    client_secret = 'todo'
+    client_id = None
+    client_secret = None
 
     try:
-        c = smappy.smappee(client_id,client_secret)
+        c = smappy.Smappee(client_id,client_secret)
         c.authenticate(init_username,init_password)
         init_password = ''
-        init_access_token = c.get_token()
+        init_access_token = c.access_token
     except HTTPError as e:
         print ('Error contacting Smappee servers. Try again later.')
         print e
@@ -102,6 +96,10 @@ def init():
         return
     except AttributeError as e:
         print ('Error: Could not get an access token from Smappee. Try again later.')
+        print e
+        return
+    except Exception as e:
+        print ('Error: Something went wrong:')
         print e
         return
     keyring.set_password("mysmappee-bitbar","username",init_username)
@@ -182,10 +180,6 @@ def main(argv):
 def run_script(script):
     return subprocess.Popen([script], stdout=subprocess.PIPE, shell=True).communicate()[0].strip()
 
-def password_dialog():
-    cmd = "osascript -e 'set my_password to display dialog \"Please enter your Tesla password:\" with title \"Tesla password\" with icon file \"Users:pvdabeel:Documents:Bitbar-plugins:icons:tesla.icns\" default answer \"\" buttons {\"Cancel\",\"Login\"} default button 2 giving up after 180 with hidden answer'"
-    print run_script(cmd)
 
 if __name__ == '__main__':
-    #password_dialog()
     main(sys.argv)
