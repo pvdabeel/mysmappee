@@ -1,7 +1,7 @@
 
 # MySmappee - bitbar plugin
 
-A simple plugin that displays Power Consumption and Solar Production for your Shammee-enabled home in the Mac OS X menubar.
+A simple plugin that displays Power Consumption and Solar Production for your Smappee-enabled home in the Mac OS X menubar.
 
 Stores and retrieves your Smappee username and password from the Mac OS X keychain.
 
