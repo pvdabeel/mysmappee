@@ -145,7 +145,7 @@ def main(argv):
     # print the data for the Smappee appliance
     print ('%sCurrent Load:  %s Watt | color=%s' % (prefix, load,color))
     print ('%s---' % prefix)
-    print ('%sExpert Mode | href=%s/smappee.html color=%s' % (prefix, HOSTNAME,color))
+    print ('%sExpert Mode | href=http://%s/smappee.html color=%s' % (prefix, HOSTNAME,color))
         
         
 

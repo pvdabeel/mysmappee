@@ -161,7 +161,7 @@ def main(argv):
         # get the data for the location      
         consumption = c.get_consumption()
 
-        # print the data for the vehicle
+        # print the data for the location
         print ('%sCurrent Load:				%s%% W | color=%s' % (prefix, consumption['load'],color))
         print ('%sCurrent Production:			%sK W | color=%s' % (prefix, consumption['production'],color))
         print ('%s---' % prefix)
@@ -174,6 +174,8 @@ def main(argv):
         print ('%sProduced electricity this year:			%sKwh | color=%s' % (prefix, consumption['load'],color))
         print ('%sConsumed gas this year:			%sm3 | color=%s' % (prefix, consumption['load'],color))
         print ('%sConsumed water this year:			%sl | color=%s' % (prefix, consumption['load'],color))
+        print ('%s---' % prefix)
+        print ('%sOpen Browser | href=http://my.smappee.com color=%s' % (prefix,color))
         
         
 
