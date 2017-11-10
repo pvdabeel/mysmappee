@@ -13,5 +13,5 @@ Tested with Smappee Energy and Smappee Solar
 1. Execute in terminal.app before running : sudo easy_install keyring smappy
 2. Ensure you have [bitbar](https://github.com/matryer/bitbar/releases/latest) installed.
 3. Ensure your bitbar plugins directory does not have a space in the path (A known bitbar bug)
-4. Copy [mysmappee.1m.py](mysmappee.1m.py) to your bitbar plugins folder and chmod +x the file from your terminal in that folder
+4. Copy [mysmappee.5m.py](mysmappee.5m.py) to your bitbar plugins folder and chmod +x the file from your terminal in that folder
 5. Run bitbar
