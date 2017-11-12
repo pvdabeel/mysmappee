@@ -4,8 +4,16 @@
 Displays home energy consumption (electricity, gas & water) and solar production information in the Mac OS X menubar. 
 Requires Bitbar and a Smappee appliance. Compatible with Smappee Energy, Smappee Solar and Smappee Gas & Water monitor.  
 
+Current power consumption:
 
 ![Imgur](https://i.imgur.com/gxrmefr.png)
+
+Browse appliances:
+
+![Imgur](https://i.imgur.com/rXKlH4j.png)
+
+
+**Update 2017.11.12:** Show your past 24h consumption, labelled and unlabelled appliances and sensors
 
 **Update 2017.11.10:** [mylocalsmappee.30s.py](mylocalsmappee.30s.py) connects directly to the Smappee appliance on your local network
 
