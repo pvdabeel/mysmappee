@@ -139,7 +139,6 @@ def main(argv):
        # create connection to smappee using token
        c = smappy.SimpleSmappee(ACCESS_TOKEN)
        locations = c.get_service_locations()
-       print ('DEBUG: %s' % locations)
     except: 
        app_print_logo()
        print ('Login to smappee.com | refresh=true terminal=true bash="\'%s\'" param1="%s" color=%s' % (sys.argv[0], 'init', color))
@@ -173,32 +172,32 @@ def main(argv):
        print ('%s lat - %s lon' % (lat, lon))
        print('---')
  
-       print('Consumption:')
+       print('Consumption')
        for hour in consumption:
-          print(hour) 
+          print('--%s : %s Watt Consumption : %s Watt Solar' % (datetime.datetime.fromtimestamp(hour['timestamp']/1000),hour['consumption'],hour['solar']))
        print('---')
 
 
-       print ('Sensors:')
+       print ('Sensors')
        for sensorunit in sensors:
           for channel in sensorunit['channels']:
-             print (' -- %s' % channel['name'])
+             print ('--%s' % channel['name'])
        print('---')
 
-       print ('Actuators:')
+       print ('Actuators')
        for actuator in actuators:
-          print (' -- %s' % actuator['name'])
+          print ('--%s' % actuator['name'])
        print('---')
 
-       print ('Labelled appliances:')
+       print ('Labelled appliances')
        for appliance in appliances:
           if (appliance['name'] <> ''):
-             print (' -- Appliance : %s' % (appliance['name']))
+             print ('--Appliance : %s' % (appliance['name']))
 
-       print ('Unlabelled appliances:')
+       print ('Unlabelled appliances')
        for appliance in appliances:
           if (appliance['name'] == ''):
-             print (' -- Appliance %s : %s' % (appliance['id'], appliance['type']))
+             print ('--Appliance %s : %s' % (appliance['id'], appliance['type']))
         
 
 
