@@ -164,13 +164,20 @@ def main(argv):
        actuators = locationinfo['actuators']
        sensors = locationinfo['sensors']
 
-       consumption = c.get_consumption(locationi,int(time.time()),2)
-
-       print consumption
+       end = int(time.mktime(datetime.datetime.now().timetuple()) * 1000)
+       start = int(time.mktime(datetime.datetime.now().replace(hour=0,minute=0,second=0,microsecond=0).timetuple()) * 1000)
+       
+       consumption = c.get_consumption(locationid,start,end,2)['consumptions']
 
        print (name)
        print ('%s lat - %s lon' % (lat, lon))
        print('---')
+ 
+       print('Consumption:')
+       for hour in consumption:
+          print(hour) 
+       print('---')
+
 
        print ('Sensors:')
        for sensorunit in sensors:
