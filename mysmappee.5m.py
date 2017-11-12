@@ -77,8 +77,8 @@ def init():
     init_password = getpass.getpass()
     init_access_token = None
 
-    client_id = None
-    client_secret = None
+    client_id = 'pvdabeel'
+    client_secret = ''
 
     try:
         c = smappy.Smappee(client_id,client_secret)
@@ -137,8 +137,9 @@ def main(argv):
     # CASE 3: init was not called, keyring initialized, no connection (access code not valid)
     try:
        # create connection to smappee using token
-       c = smappy.smappee(ACCESS_TOKEN)
+       c = smappy.SimpleSmappee(ACCESS_TOKEN)
        locations = c.get_service_locations()
+       print ('DEBUG: %s' % locations)
     except: 
        app_print_logo()
        print ('Login to smappee.com | refresh=true terminal=true bash="\'%s\'" param1="%s" color=%s' % (sys.argv[0], 'init', color))
@@ -153,29 +154,65 @@ def main(argv):
         prefix = '--'
 
     # loop through locations, print menu with relevant info       
-    for i, location in enumerate(locations):
-        if prefix:
-            print c.get_service_location(location)
+    for location in locations['serviceLocations']:
+       locationid = location['serviceLocationId']
+       locationinfo = c.get_service_location_info(locationid)
+       name = location['name']
+       appliances = locationinfo['appliances']
+       lat = locationinfo['lat']
+       lon = locationinfo['lon']
+       actuators = locationinfo['actuators']
+       sensors = locationinfo['sensors']
+
+       consumption = c.get_consumption(locationi,int(time.time()),2)
+
+       print consumption
+
+       print (name)
+       print ('%s lat - %s lon' % (lat, lon))
+       print('---')
+
+       print ('Sensors:')
+       for sensorunit in sensors:
+          for channel in sensorunit['channels']:
+             print (' -- %s' % channel['name'])
+       print('---')
+
+       print ('Actuators:')
+       for actuator in actuators:
+          print (' -- %s' % actuator['name'])
+       print('---')
+
+       print ('Labelled appliances:')
+       for appliance in appliances:
+          if (appliance['name'] <> ''):
+             print (' -- Appliance : %s' % (appliance['name']))
+
+       print ('Unlabelled appliances:')
+       for appliance in appliances:
+          if (appliance['name'] == ''):
+             print (' -- Appliance %s : %s' % (appliance['id'], appliance['type']))
+        
 
 
-        # get the data for the location      
-        consumption = c.get_consumption()
+       # get the data for the location      
+       # consumption = c.get_consumption()
 
         # print the data for the location
-        print ('%sCurrent Load:				%s%% W | color=%s' % (prefix, consumption['load'],color))
-        print ('%sCurrent Production:			%sK W | color=%s' % (prefix, consumption['production'],color))
-        print ('%s---' % prefix)
-        print ('%sConsumed electricity today:			%sKwh | color=%s' % (prefix, consumption['load'],color))
-        print ('%sProduced electricity today:			%sKwh | color=%s' % (prefix, consumption['load'],color))
-        print ('%sConsumed gas today:			%sm3 | color=%s' % (prefix, consumption['load'],color))
-        print ('%sConsumed water today:			%sl | color=%s' % (prefix, consumption['load'],color))
-        print ('%s---' % prefix)
-        print ('%sConsumed this year:			%sKwh | color=%s' % (prefix, consumption['load'],color))
-        print ('%sProduced electricity this year:			%sKwh | color=%s' % (prefix, consumption['load'],color))
-        print ('%sConsumed gas this year:			%sm3 | color=%s' % (prefix, consumption['load'],color))
-        print ('%sConsumed water this year:			%sl | color=%s' % (prefix, consumption['load'],color))
-        print ('%s---' % prefix)
-        print ('%sOpen Browser | href=http://my.smappee.com color=%s' % (prefix,color))
+        #print ('%sCurrent Load:				%s%% W | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sCurrent Production:			%sK W | color=%s' % (prefix, consumption['production'],color))
+        #print ('%s---' % prefix)
+        #print ('%sConsumed electricity today:			%sKwh | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sProduced electricity today:			%sKwh | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sConsumed gas today:			%sm3 | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sConsumed water today:			%sl | color=%s' % (prefix, consumption['load'],color))
+        #print ('%s---' % prefix)
+        #print ('%sConsumed this year:			%sKwh | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sProduced electricity this year:			%sKwh | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sConsumed gas this year:			%sm3 | color=%s' % (prefix, consumption['load'],color))
+        #print ('%sConsumed water this year:			%sl | color=%s' % (prefix, consumption['load'],color))
+        #print ('%s---' % prefix)
+        #print ('%sOpen Browser | href=http://my.smappee.com color=%s' % (prefix,color))
         
         
 
