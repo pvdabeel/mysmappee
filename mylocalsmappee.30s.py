@@ -49,7 +49,10 @@ from datetime import date
 
 # Streaming - requires bitbar v2 beta10 or higher
 
-STREAMING = True
+STREAMING = False
+
+if os.getenv('BitBarVersion',0) :
+  STREAMING = True
 
 # Nice ANSI colors
 CEND    = '\33[0m'
