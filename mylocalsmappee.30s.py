@@ -47,6 +47,10 @@ import smappy
 
 from datetime import date
 
+# Streaming - requires bitbar v2 beta10 or higher
+
+STREAMING = True
+
 # Nice ANSI colors
 CEND    = '\33[0m'
 CRED    = '\33[31m'
@@ -136,18 +140,29 @@ def main(argv):
 
 
     # CASE 4: all ok, all other cases
-    app_print_logo()
-    prefix = ''
+    if STREAMING:
+       while True:
 
-    # get the data for the location      
-    load = c.active_power()
+          # get the data for the location      
+          load = c.active_power()
 
-    # print the data for the Smappee appliance
-    print ('%sCurrent Load:  %s Watt | color=%s' % (prefix, load,color))
-    print ('%s---' % prefix)
-    print ('%sExpert Mode | href=http://%s/smappee.html color=%s' % (prefix, HOSTNAME,color))
-        
-        
+          # print the data for the Smappee appliance
+          print ('%s Watt | color=%s' % (load,color))
+          print ('---')
+          print ('Expert Mode | href=http://%s/smappee.html color=%s' % (HOSTNAME,color))
+          print ('~~~')
+          time.sleep(0.5)
+    else:
+       app_print_logo()
+       prefix = ''
+
+       # get the data for the location      
+       load = c.active_power()
+
+       # print the data for the Smappee appliance
+       print ('%sCurrent Load:  %s Watt | color=%s' % (prefix, load,color))
+       print ('%s---' % prefix)
+       print ('%sExpert Mode | href=http://%s/smappee.html color=%s' % (prefix, HOSTNAME,color))
 
 def run_script(script):
     return subprocess.Popen([script], stdout=subprocess.PIPE, shell=True).communicate()[0].strip()

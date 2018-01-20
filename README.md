@@ -12,6 +12,7 @@ Browse appliances:
 
 ![Imgur](https://i.imgur.com/rXKlH4j.png)
 
+**Update 2018.01.20:** Added Streaming support (requires Bitbar v2 beta10 or higher. Continuously updates and shows power consumption in menu bar.
 
 **Update 2017.11.12:** Show your past 24h consumption, labelled and unlabelled appliances and sensors
 
