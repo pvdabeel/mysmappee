@@ -26,7 +26,7 @@ Not tested with Smappee Plus and Smappee Pro
 
 ## Installation instructions: 
 
-1. Execute in terminal.app before running : sudo easy_install keyring smappy
+1. Execute in terminal.app before running : sudo easy_install keyring==8.7 smappy
 2. Ensure you have [bitbar](https://github.com/matryer/bitbar/releases/latest) installed.
 3. Ensure your bitbar plugins directory does not have a space in the path (A known bitbar bug)
 4. Copy [mysmappee.5m.py](mysmappee.5m.py) or [mylocalsmappee.30s.py](mylocalsmappee.30s.py) to your bitbar plugins folder and chmod +x the file from your terminal in that folder
